@@ -46,7 +46,7 @@ int main()
     title_text.setPosition(sf::Vector2f(window.getSize().x / 2, 200));
     title_text.setFillColor(sf::Color::Green);
     
-    auto credits_text = sf::Text("Made for hanoip by 0xB00B, ROOT Required, Moto g40 Charge Control v1.0", font, 28);
+    auto credits_text = sf::Text(" Made for hanoip by 0xB00B, ROOT Required, Hanoip Charge Control v2.0", font, 28);
     
     std::vector<sf::Text> texts;
     std::vector<sf::RectangleShape> boxes;
@@ -60,7 +60,7 @@ int main()
         text.setPosition(sf::Vector2f(window.getSize().x / 2, 250 + window.getSize().y/12.f*(i+1)));
         texts.push_back(text);
         
-        auto box = sf::RectangleShape({500.f, 100.f});
+        auto box = sf::RectangleShape({600.f, 100.f});
         box.setFillColor(sf::Color::Blue);
         auto boxRect = box.getLocalBounds();
         box.setOrigin(boxRect.width/2, boxRect.height/2);
@@ -79,6 +79,14 @@ int main()
             ;;;; if (event.type == sf::Event::Closed)
             {
                 window.close();
+            }
+            else if (event.type == sf::Event::Resized)
+            {
+                window.setView(sf::View{{0,0, event.size.width, event.size.height}});
+            }
+            else if (event.type == sf::Event::LostFocus)
+            {
+                window.setActive(false); // fixes black screen issue on app switching
             }
             else if (event.type == sf::Event::TouchBegan)
             {
